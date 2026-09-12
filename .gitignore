@@ -179,3 +179,14 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+# Runtime data files
+memory.db
+*.db
+*.sqlite3
+.smoke.log
+cli_test.db
+# Windows
+*.bat
+*.cmd
+*.ps1

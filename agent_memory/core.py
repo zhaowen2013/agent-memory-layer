@@ -1,4 +1,3 @@
-"""Core data structures and base types for the agent memory layer."""
 from __future__ import annotations
 
 import abc

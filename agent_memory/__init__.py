@@ -1,4 +1,3 @@
-"""agent-memory: pluggable local memory layer for AI agents."""
 from .core import MemoryEntry, MemoryError
 from .embeddings import EmbeddingProvider, HashingEmbedder, OpenAIEmbedder, LocalHFEmbedder
 from .stores import VectorStore, SQLiteVectorStore, ChromaStore, cosine
