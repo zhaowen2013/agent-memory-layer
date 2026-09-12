@@ -1,20 +1,34 @@
 # agent-memory-layer
 
-[![Buy Me A Coffee](https://img.shields.io/badge/-Buy%20Me%20A%20Coffee-ff5f5f?logo=buymeacoffee&labelColor=gray)](https://www.buymeacoffee.com/zhaowen2013)
-
 **AI Agent 记忆的永久化工具。** 本地优先、零依赖开箱、完全可插拔——给 Agent 一个不需要云端、不会被清空的长期记忆。
 
 [![PyPI version](https://img.shields.io/pypi/v/agent-memory.svg)](https://pypi.org/project/agent-memory/)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Tests](https://github.com/zhaowen2013/agent-memory-layer/actions/workflows/tests.yml/badge.svg)](https://github.com/zhaowen2013/agent-memory-layer/actions)
-
-## Quick Start
+[![Lint](https://github.com/zhaowen2013/agent-memory-layer/actions/workflows/lint.yml/badge.svg)](https://github.com/zhaowen2013/agent-memory-layer/actions)
 
 ```bash
 pip install -e .
 agent-memory add "用户偏好中文简洁回复"
 agent-memory recall "怎么回应用户的风格偏好"
+```
+
+## 🚀 5 分钟上手
+
+```bash
+# 安装(零依赖，离线可用)
+pip install -e .
+
+# 写入记忆
+agent-memory add "用户偏好中文回复" --meta topic:style
+agent-memory add "项目用 FastAPI + SQLite" --meta topic:stack
+
+# 检索
+agent-memory recall "语言偏好"
+
+# 查看全部
+agent-memory list
 ```
 
 ## 问题与定位

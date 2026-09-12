@@ -1,49 +1,50 @@
 # agent-memory-layer
 
-Local-first, pluggable memory layer for AI agents. Zero dependencies by default.
+本地 AI Agent 记忆工具。零依赖、零配置、开箱即用。
 
-**Features:**
-- Plug-and-play: swap embeddings, vector stores, and summarizers
-- Zero-cloud: runs entirely offline with hashed vectors + SQLite
-- Auto-compression: `consolidate()` keeps memory bounded
-- CLI + Python SDK
+## 5 分钟上手
 
-## Quick Start
+```bash
+pip install agent-memory
+agent-memory add "用户偏好中文" --meta topic:style
+agent-memory recall "语言偏好"
+```
+
+## 核心功能
+
+- **写入记忆**: `agent-memory add "文本" --meta topic:xxx`
+- **检索记忆**: `agent-memory recall "关键词"`
+- **压缩记忆**: `agent-memory consolidate`
+
+## Python SDK
 
 ```python
 from agent_memory import MemoryLayer
-
-mem = MemoryLayer(db_path="memory.db")
-mem.remember("User prefers concise replies", metadata={"topic": "style"})
-hits = mem.recall("reply style", top_k=3)
+mem = MemoryLayer()
+mem.remember("用户偏好中文")
+hits = mem.recall("语言")
 ```
 
-Or CLI:
+## 特性
+
+| 特性 | 说明 |
+|---|---|
+| 零配置 | 无需 API Key，无需模型 |
+| 离线运行 | 数据留在本机 |
+| 自动压缩 | 旧记忆自动合并 |
+
+## 安装
 
 ```bash
-agent-memory add "User prefers concise replies" --meta topic:style
-agent-memory recall "reply style"
+pip install -e .                    # 零依赖
+pip install -e ".[hf]"              # + 语义向量
+pip install -e ".[openai]"          # + OpenAI
+pip install -e ".[chroma]"          # + ANN存储
 ```
 
-## Install
+## 完整文档
 
-```bash
-pip install -e .                    # zero deps
-pip install -e ".[hf]"              # + semantic embeddings
-pip install -e ".[openai]"          # + OpenAI API
-pip install -e ".[chroma]"          # + ANN vector DB
-```
-
-## Architecture
-
-```
-MemoryLayer
-    ├── EmbeddingProvider (Hashing / LocalHF / OpenAI)
-    ├── VectorStore       (SQLite / Chroma)
-    └── Summarizer        (Extractive / LLM)
-```
-
-Each layer is fully pluggable. See README.md for full docs.
+[README.md](./README.md) · [CHANGELOG.md](./CHANGELOG.md) · [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 ## License
 
