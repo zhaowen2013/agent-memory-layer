@@ -2,8 +2,9 @@
 
 **AI Agent 记忆的永久化工具。** 本地优先、零依赖开箱、完全可插拔——给 Agent 一个不需要云端、不会被清空的长期记忆。
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PyPI version](https://img.shields.io/pypi/v/agent-memory.svg)](https://pypi.org/project/agent-memory/)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Tests](https://github.com/zhaowen2013/agent-memory-layer/actions/workflows/tests.yml/badge.svg)](https://github.com/zhaowen2013/agent-memory-layer/actions)
 
 ```bash
@@ -86,7 +87,7 @@ mem = MemoryLayer(embedder=LocalHFEmbedder(), store=ChromaStore("./db"))
 ## 核心特性
 
 | 特性 | 说明 |
-| --- | --- |
+|---|---|
 | 零依赖默认 | 纯 Python 哈希向量 + SQLite,无需模型/AI API |
 | 长期记忆压缩 | `consolidate()` 自动把低频记忆压成摘要,防止工作集膨胀 |
 | 元数据过滤 | recall 时按 metadata 字段过滤,精准召回 |
@@ -96,10 +97,19 @@ mem = MemoryLayer(embedder=LocalHFEmbedder(), store=ChromaStore("./db"))
 ## 组件一览
 
 | 接口 | 默认(零依赖) | 可替换 |
-| --- | --- | --- |
+|---|---|---|
 | `EmbeddingProvider` | `HashingEmbedder`(词哈希 TF) | `LocalHFEmbedder`, `OpenAIEmbedder` |
 | `VectorStore` | `SQLiteVectorStore`(余弦) | `ChromaStore` |
 | `Summarizer` | `ExtractiveSummarizer`(无 LLM) | `LLMSummarizer` |
+
+## 与其他方案对比
+
+| 方案 | 云端依赖 | 可离线 | 可插拔 | 自动压缩 |
+|---|---|---|---|---|
+| **agent-memory-layer** | ✅ 可选 | ✅ | ✅ 三层 | ✅ `consolidate()` |
+| LangChain 记忆 | ❌ 通常云端 | ❌ | 部分 | ❌ |
+| Haystack 记忆 | ❌ 通常云端 | ❌ | 部分 | ❌ |
+| 自建向量库 | ❌ | ✅ | 手动 | ❌ |
 
 ## 路线
 
@@ -108,16 +118,6 @@ mem = MemoryLayer(embedder=LocalHFEmbedder(), store=ChromaStore("./db"))
 - [ ] faiss/lance 适配器
 - [ ] HTTP server 模式(多 Agent 共享同一记忆库)
 - [ ] JSONL 导出导入
-- [ ] 向量库自动清理(回收已合并的旧条目)
-
-## 对比同类项目
-
-| 项目 | 特点 | 本项目优势 |
-| --- | --- | --- |
-| LangChain Memory | 重度框架依赖 | 轻量可嵌入任意 Agent 框架 |
-| CrewAI Memory | 团队 Agent 场景 | 单 Agent 本地持久化,零依赖 |
-| LlamaIndex Memory | 依赖 LLM | 纯本地默认,不依赖云端 |
-| mem0.ai | 云端托管 | 完全本地,数据不出本机 |
 
 ## License
 
